@@ -2,13 +2,8 @@ package main
 
 import (
 	"fmt"
-	"math/big"
-	"time"
 
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/logicfool/GoSniper/config"
-	"github.com/logicfool/GoSniper/utils"
+	"github.com/logicfool/GoSniper/sniper"
 )
 
 func main() ***REMOVED***
@@ -36,19 +31,13 @@ func main() ***REMOVED***
 	// output, err := contract.WETH(&bind.CallOpts***REMOVED******REMOVED***)
 	// fmt.Println("WETH ADDRESS FROM UNI ROUTER", output, err)
 
-	MainConf := config.QuickMaintainConfig(56)
-	weth, err := MainConf.Exchanges[0].Router.WETH(&bind.CallOpts***REMOVED******REMOVED***)
-	if err != nil ***REMOVED***
-	***REMOVED***
-	path := []common.Address***REMOVED***weth, utils.ToChecksumAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")***REMOVED***
-	// interact and buy a token from pancakeswap contract
-	// deadline is 5 mins from now
-	// path:= [weth,utils.ToChecksumAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")]
-	deadline := time.Now().Add(time.Minute * 5).Unix()
-	tx, err := MainConf.Exchanges[0].Router.SwapExactETHForTokensSupportingFeeOnTransferTokens(MainConf.WalletAuths[0], big.NewInt(0), path, MainConf.WalletAuths[0].From, big.NewInt(deadline))
-	if err != nil ***REMOVED***
-		panic(err)
-	***REMOVED***
-	fmt.Println(tx.Hash().Hex())
-
+	MainConf := sniper.QuickMaintainConfig(56)
+	fmt.Println(MainConf.GetClient())
+	fmt.Println(MainConf.WeiToEther(1000000000000000000, 18))
+	// weth, err := MainConf.Exchanges[0].Router.WETH(&bind.CallOpts***REMOVED******REMOVED***)
+	// if err != nil ***REMOVED***
+	// ***REMOVED***
+	// path := []common.Address***REMOVED***weth, utils.ToChecksumAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")***REMOVED***
+	// deadline := time.Now().Add(time.Minute * 5).Unix()
+	// buy_conf, err := sniper.BuyToken(MainConf.Exchanges[0].Router, path, MainConf.WalletAuths[0], big.NewInt(1))
 ***REMOVED***

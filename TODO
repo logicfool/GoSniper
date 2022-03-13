@@ -1,0 +1,10 @@
+Contracts: 
+    - A function to load contracts from their Abi and Contract Address
+
+Config:
+    - A way to choose between all the available Exchanges either by setting it in Config or via the Console Arguments.
+    - Defining Factor to choose if the bot will use multi wallet or go with single wallet.
+
+- Clean The Code As much as Possible
+- Remove double declarations of functions
+
