@@ -386,4 +386,21 @@
       "stateMutability": "view",
       "type": "function"
 ***REMOVED***
+    ***REMOVED***"constant":false,
+      "inputs":[],
+      "name":"deposit",
+      "outputs":[],
+      "payable":true,
+      "stateMutability":"payable",
+      "type":"function"***REMOVED***,
+      ***REMOVED***"constant":false,
+        "inputs":[
+          ***REMOVED***"name":"wad","type":"uint256"***REMOVED***
+      ***REMOVED***
+        "name":"withdraw",
+        "outputs":[],
+        "payable":false,
+        "stateMutability":"nonpayable",
+        "type":"function"
+  ***REMOVED***
   ]
