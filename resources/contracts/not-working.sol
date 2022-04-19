@@ -227,16 +227,20 @@ contract GoSniper ***REMOVED***
 ***REMOVED***
 
     function TradeDirectlyByPair(address _router,address[] memory path,uint _amount,uint _split) public payable***REMOVED***
+        // IFactory factory;
         ILiquidityPair pair;
         uint amountout;
         address token0;address token1;
         if(exchanges[_router].factory == address(0x0))***REMOVED***
+            // factory = IFactory(IRouter(_router).factory());
+            // exchanges[_router].factory = address(factory);
             exchanges[_router].factory = IRouter(_router).factory();
             pair = ILiquidityPair(IFactory(exchanges[_router].factory).getPair(path[0],path[1]));
             
     ***REMOVED***else***REMOVED***
             pair = ILiquidityPair(IFactory(exchanges[_router].factory).getPair(path[0],path[1]));
     ***REMOVED***
+        // pair = ILiquidityPair(factory.getPair(path[0],path[1]));
         if (address(pair) == address(0x0))***REMOVED***
             require(false,string(abi.encodePacked('Error : Pair not found or Not available!')));
     ***REMOVED***

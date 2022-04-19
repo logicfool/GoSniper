@@ -7,4 +7,20 @@ Config:
 
 - Clean The Code As much as Possible
 - Remove double declarations of functions
+<!-- - Fix config Creation and add default values! -->
 
+<!-- IMP -->
+- Fix Pair Checking When preverifying (getting false positives of being in a different pair even if in wbnb)
+- Add Price Calculations to it and when to sell at how much price increase!
+- A price aggregator contract to get prices of multiple tokens!
+
+
+Fix Pair address issue in linux 
+voidcode@MessaPrivateNode:~/go/src/GoSniper$ go run main.go --hpc --maxst 20 --network bsc 0x1d871ed702FA8c220F03Ddf8e20DCf512a 0.01
+2022/03/21 21:08:28 [+] Starting Sniper
+2022/03/21 21:08:28 [+] Loading config
+2022/03/21 21:08:28 [-] No Exchange passed defaulting to: pancake
+2022/03/21 21:08:28 [+] Loaded Wallets: 0xABd3E1274A93a09BEa79d6e8Be9259eAAF57E7dd, 0xB00B444a63B343a6543c8a6136Dc4F58F83D0552, 
+2022/03/21 21:08:28 [+] Choosen Network: bsc
+0x29087179F8a705BAe3fAF959F599442319089651 0x0000001D871ED702fa8c220F03dDF8e20DCF512a 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c
+^Csignal: interrupt [-] Error: no contract code at given address Pair: 0x29087179F8a705BAe3fAF959F599442319089651

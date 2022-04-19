@@ -16,3 +16,20 @@
 
 # unwanted files
 notes.txt
+
+
+# ignore node modules
+*/node_modules/*
+node_modules
+
+#python test stuff
+*/__pycache__/*
+__pycache__
+
+
+#vs code stuff
+.vscode
+
+# Some Sensitive Files
+config.json
+config.*
