@@ -1,254 +1,254 @@
 from web3 import Web3
 erc20abi = """[
-	***REMOVED***
+	{
 		"anonymous": false,
 		"inputs": [
-			***REMOVED***
+			{
 				"indexed": true,
 				"internalType": "address",
 				"name": "owner",
 				"type": "address"
-			***REMOVED***,
-			***REMOVED***
+			},
+			{
 				"indexed": true,
 				"internalType": "address",
 				"name": "spender",
 				"type": "address"
-			***REMOVED***,
-			***REMOVED***
+			},
+			{
 				"indexed": false,
 				"internalType": "uint256",
 				"name": "value",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"name": "Approval",
 		"type": "event"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"anonymous": false,
 		"inputs": [
-			***REMOVED***
+			{
 				"indexed": true,
 				"internalType": "address",
 				"name": "from",
 				"type": "address"
-			***REMOVED***,
-			***REMOVED***
+			},
+			{
 				"indexed": true,
 				"internalType": "address",
 				"name": "to",
 				"type": "address"
-			***REMOVED***,
-			***REMOVED***
+			},
+			{
 				"indexed": false,
 				"internalType": "uint256",
 				"name": "value",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"name": "Transfer",
 		"type": "event"
-	***REMOVED***,
- ***REMOVED***"constant":false,"inputs":[***REMOVED***"name":"wad","type":"uint256"***REMOVED***],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"***REMOVED***,
-	***REMOVED***
+	},
+ {"constant":false,"inputs":[{"name":"wad","type":"uint256"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},
+	{
 		"inputs": [
-			***REMOVED***
+			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			***REMOVED***,
-			***REMOVED***
+			},
+			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			***REMOVED***
+			}
 		],
 		"name": "allowance",
 		"outputs": [
-			***REMOVED***
+			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"stateMutability": "view",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [
-			***REMOVED***
+			{
 				"internalType": "address",
 				"name": "spender",
 				"type": "address"
-			***REMOVED***,
-			***REMOVED***
+			},
+			{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"name": "approve",
 		"outputs": [
-			***REMOVED***
+			{
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
-			***REMOVED***
+			}
 		],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [
-			***REMOVED***
+			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			***REMOVED***
+			}
 		],
 		"name": "balanceOf",
 		"outputs": [
-			***REMOVED***
+			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"stateMutability": "view",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [
-			***REMOVED***
+			{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"name": "burn",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [],
 		"name": "decimals",
 		"outputs": [
-			***REMOVED***
+			{
 				"internalType": "uint8",
 				"name": "",
 				"type": "uint8"
-			***REMOVED***
+			}
 		],
 		"stateMutability": "view",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [
-			***REMOVED***
+			{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"name": "mint",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [],
 		"name": "name",
 		"outputs": [
-			***REMOVED***
+			{
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			***REMOVED***
+			}
 		],
 		"stateMutability": "view",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [],
 		"name": "symbol",
 		"outputs": [
-			***REMOVED***
+			{
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			***REMOVED***
+			}
 		],
 		"stateMutability": "view",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [],
 		"name": "totalSupply",
 		"outputs": [
-			***REMOVED***
+			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"stateMutability": "view",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [
-			***REMOVED***
+			{
 				"internalType": "address",
 				"name": "recipient",
 				"type": "address"
-			***REMOVED***,
-			***REMOVED***
+			},
+			{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"name": "transfer",
 		"outputs": [
-			***REMOVED***
+			{
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
-			***REMOVED***
+			}
 		],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	***REMOVED***,
-	***REMOVED***
+	},
+	{
 		"inputs": [
-			***REMOVED***
+			{
 				"internalType": "address",
 				"name": "sender",
 				"type": "address"
-			***REMOVED***,
-			***REMOVED***
+			},
+			{
 				"internalType": "address",
 				"name": "recipient",
 				"type": "address"
-			***REMOVED***,
-			***REMOVED***
+			},
+			{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
-			***REMOVED***
+			}
 		],
 		"name": "transferFrom",
 		"outputs": [
-			***REMOVED***
+			{
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
-			***REMOVED***
+			}
 		],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	***REMOVED***
+	}
 ]"""
 
 # import solc compiler
@@ -301,7 +301,7 @@ contract = w3.eth.contract(abi=sniperabi, address=contract_address)  #bytecode=s
 
 if chi_token.functions.allowance(pk.address,contract_address).call() < 1000000000000000000:
     print("CHI TOKEN ALLOWANCE IS NOT ENOUGH Approving now!")
-    tx_hash = chi_token.functions.approve(contract_address,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction(***REMOVED***"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)***REMOVED***)
+    tx_hash = chi_token.functions.approve(contract_address,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction({"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)})
     signed_tx = pk.signTransaction(tx_hash)
     tx_hash = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
     print("Chi allowance TX HASH:",tx_hash.hex())
@@ -309,7 +309,7 @@ if chi_token.functions.allowance(pk.address,contract_address).call() < 100000000
 exit();
 
 try:
-    tx = contract.functions.TradeDirectlyByPairWithGasRefund(*buy_args_1,3).buildTransaction(***REMOVED***"value":1000000000000000,"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)***REMOVED***)
+    tx = contract.functions.TradeDirectlyByPairWithGasRefund(*buy_args_1,3).buildTransaction({"value":1000000000000000,"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)})
     signed_tx = pk.sign_transaction(tx)
     txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
     receipt = w3.eth.waitForTransactionReceipt(txx)
@@ -318,20 +318,20 @@ except Exception as e:
     print("Buy Tx 1 failed!",e)
     exit();
         
-tx = token_contract1.functions.approve(contract_address,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction(***REMOVED***"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)***REMOVED***)
+tx = token_contract1.functions.approve(contract_address,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction({"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)})
 signed_tx = pk.sign_transaction(tx)
 txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 receipt = w3.eth.waitForTransactionReceipt(txx)
 print("Approval: ",w3.toHex(txx))
 
-tx = weth.functions.approve(contract_address,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction(***REMOVED***"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)***REMOVED***)
+tx = weth.functions.approve(contract_address,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction({"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)})
 signed_tx = pk.sign_transaction(tx)
 txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 receipt = w3.eth.waitForTransactionReceipt(txx)
 print("Approval WETH: ",w3.toHex(txx))
 
 try:
-    tx = contract.functions.TradeDirectlyByPairWithGasRefund(*buy_args_3,token_contract1.functions.balanceOf(pk.address).call(),5).buildTransaction(***REMOVED***"value":0,"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)***REMOVED***)
+    tx = contract.functions.TradeDirectlyByPairWithGasRefund(*buy_args_3,token_contract1.functions.balanceOf(pk.address).call(),5).buildTransaction({"value":0,"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address)})
     # get tx data
     signed_tx = pk.sign_transaction(tx)
     txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
@@ -342,14 +342,14 @@ except Exception as e:
     exit();
     
 
-# hp_check = contract.functions.HoneyPotCheck(*buy_args_1[:2],5).call(***REMOVED***"from":pk.address,"value":1000000000000000000***REMOVED***)
+# hp_check = contract.functions.HoneyPotCheck(*buy_args_1[:2],5).call({"from":pk.address,"value":1000000000000000000})
 
 # tx = contract.functions.GetBalance("0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c").call()
 
 # tx = weth.functions.balanceOf(pk.address).call(),weth.functions.balanceOf(contract_address).call(),w3.eth.getBalance(pk.address)
 # print("Before: ",tx)
 
-# tx = weth.functions.withdraw(tx[0]).buildTransaction(***REMOVED***"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000***REMOVED***)
+# tx = weth.functions.withdraw(tx[0]).buildTransaction({"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000})
 # signed_tx = pk.sign_transaction(tx)
 # txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction) 
 

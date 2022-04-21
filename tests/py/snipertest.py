@@ -24,7 +24,7 @@ pk = w3.eth.account.privateKeyToAccount("***REMOVED***")
 
 # bal = w3.fromWei(w3.eth.getBalance(pk.address),"ether")
 # if (bal<10):
-#     tx_params = ***REMOVED***"value":w3.toWei("15","ether"),"from":w3.eth.accounts[0],"to":pk.address***REMOVED***
+#     tx_params = {"value":w3.toWei("15","ether"),"from":w3.eth.accounts[0],"to":pk.address}
 #     tx_hash = w3.eth.sendTransaction(tx_params)
     
 
@@ -45,16 +45,16 @@ if w3.eth.chainId == 1:
     buy_args_3 = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",["0xf4d2888d29D722226FafA5d9B24F9164c092421E","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"]
 elif (w3.eth.chainId == 56) or (w3.eth.chainId == 31337):
     contract = w3.eth.contract(abi=sniperabi, bytecode=sniperbytecode)
-    data11 = ***REMOVED******REMOVED***
+    data11 = {}
     data11['abi'] = sniperabi
     data11["bytecode"] = sniperbytecode
     strr = json.dump(data11,open("sniperdata.json","w"))
-    tx = contract.constructor("0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c","0x0000000000004946c0e9F43F4Dee607b0eF1fA1c").buildTransaction(***REMOVED***
+    tx = contract.constructor("0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c","0x0000000000004946c0e9F43F4Dee607b0eF1fA1c").buildTransaction({
 		'from': pk.address,
 		'nonce': w3.eth.getTransactionCount(pk.address),
 		'gas': 5000000,
 		'gasPrice': w3.toWei('40', 'gwei')
-	***REMOVED***)
+	})
     signed = pk.signTransaction(tx)
     tx_hash = w3.eth.sendRawTransaction(signed.rawTransaction)
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
@@ -75,16 +75,16 @@ elif (w3.eth.chainId == 56) or (w3.eth.chainId == 31337):
     
 elif (w3.eth.chainId == 97):
     contract = w3.eth.contract(abi=sniperabi, bytecode=sniperbytecode)
-    data11 = ***REMOVED******REMOVED***
+    data11 = {}
     data11['abi'] = sniperabi
     data11["bytecode"] = sniperbytecode
     strr = json.dump(data11,open("sniperdata.json","w"))
-    tx = contract.constructor("0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd","0x0000000000000000000000000000000000000000").buildTransaction(***REMOVED***
+    tx = contract.constructor("0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd","0x0000000000000000000000000000000000000000").buildTransaction({
 		'from': pk.address,
 		'nonce': w3.eth.getTransactionCount(pk.address),
 		'gas': 5000000,
 		'gasPrice': w3.toWei('40', 'gwei')
-	***REMOVED***)
+	})
     signed = pk.signTransaction(tx)
     tx_hash = w3.eth.sendRawTransaction(signed.rawTransaction)
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
@@ -111,7 +111,7 @@ elif w3.eth.chainId == 137:
     buy_args_3 = "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff",["0x831753DD7087CaC61aB5644b308642cc1c33Dc13","0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270"]
     
 # try:
-#     tx = contract.functions.TradeDirectlyByPairWithETH(*buy_args_1).buildTransaction(***REMOVED***"value":1000000000000000000,"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000***REMOVED***)
+#     tx = contract.functions.TradeDirectlyByPairWithETH(*buy_args_1).buildTransaction({"value":1000000000000000000,"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000})
 #     signed_tx = pk.sign_transaction(tx)
 #     txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 #     tx_receipt = w3.eth.waitForTransactionReceipt(txx)
@@ -121,7 +121,7 @@ elif w3.eth.chainId == 137:
 #     print("Buy Tx 1 failed!",e)
 #     exit();
     
-	# txx = weth.functions.approve(contract.address,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction(***REMOVED***"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000***REMOVED***)
+	# txx = weth.functions.approve(contract.address,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction({"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000})
 	# signed_tx = pk.sign_transaction(txx)
 	# txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 	# tx_receipt = w3.eth.waitForTransactionReceipt(txx)
@@ -129,25 +129,25 @@ elif w3.eth.chainId == 137:
 	# 	print("Approve Tx Succeeded: ", w3.toHex(txx))
 
 	# print("Token 1 contract: ",token_contract1.address)
-	# tx = token_contract1.functions.approve(contract.address ,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction(***REMOVED***"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000***REMOVED***)
+	# tx = token_contract1.functions.approve(contract.address ,115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction({"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000})
 	# signed_tx = pk.sign_transaction(tx)
 	# txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 	# receipt = w3.eth.waitForTransactionReceipt(txx)
 	# print("Approval: ",w3.toHex(txx))
 
-	# # TestReserves = contract.functions.HoneyPotCheck("0x10ED43C718714eb63d5aA57B78B54704E256024E",["0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c","0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"],token_contract1.functions.balanceOf(pk.address).call(),1).call(***REMOVED***"from":pk.address,"value":1000000000000000000,"gasPrice":5000000000***REMOVED***)
+	# # TestReserves = contract.functions.HoneyPotCheck("0x10ED43C718714eb63d5aA57B78B54704E256024E",["0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c","0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"],token_contract1.functions.balanceOf(pk.address).call(),1).call({"from":pk.address,"value":1000000000000000000,"gasPrice":5000000000})
 	# # print("TestReserves: ",TestReserves)
 
 
 	# majoraddresses = ["0x10ED43C718714eb63d5aA57B78B54704E256024E","0x000000000000000000000000000000000000dEaD","0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16"]
 	# path =["0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56","0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"]
 
-	# # HoneyCheck = contract.functions.HoneyPotCheck(majoraddresses,path,int(token_contract1.functions.balanceOf(pk.address).call()/2),1).call(***REMOVED***"from":pk.address,"gasPrice":50000000000***REMOVED***)
+	# # HoneyCheck = contract.functions.HoneyPotCheck(majoraddresses,path,int(token_contract1.functions.balanceOf(pk.address).call()/2),1).call({"from":pk.address,"gasPrice":50000000000})
 	# # print("HoneyCheck Using Pair: ",HoneyCheck)
 
 
 	# path =["0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c","0xF700D4c708C2be1463E355F337603183D20E0808"]
-	# HoneyCheck = contract.functions.HoneyPotCheck(majoraddresses,path,0,1).call(***REMOVED***"from":pk.address,"gasPrice":50000000000,"value":1000000000000000000***REMOVED***)
+	# HoneyCheck = contract.functions.HoneyPotCheck(majoraddresses,path,0,1).call({"from":pk.address,"gasPrice":50000000000,"value":1000000000000000000})
 	# print("HoneyCheck Using ETH: ",HoneyCheck)
 
 
@@ -177,15 +177,15 @@ elif w3.eth.chainId == 137:
 # stablecoin = "0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE"
 # router = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
 
-# getprices = contract.functions.GetPrices(router,stablecoin,pairs_to_get).call(***REMOVED***"from":pk.address,"gasPrice":50000000000,"value":int(0.1*10**18)***REMOVED***)
+# getprices = contract.functions.GetPrices(router,stablecoin,pairs_to_get).call({"from":pk.address,"gasPrice":50000000000,"value":int(0.1*10**18)})
 # print("GetPrices: ",getprices) 
 # bnbvalue= getprices[0]/10**18
-# print(f"BNB price: ***REMOVED***bnbvalue***REMOVED***")
+# print(f"BNB price: {bnbvalue}")
 # for ii in range(0,len(pairs_to_get)):
 #     price,decimal =getprices[1][ii] 
 #     price = price/10**decimal
 #     price = bnbvalue/price
-#     print(f"Price Of ***REMOVED***pairs_to_get[ii]***REMOVED*** is ***REMOVED***price***REMOVED***,Amount: ***REMOVED***getprices[1][ii][0]***REMOVED***")
+#     print(f"Price Of {pairs_to_get[ii]} is {price},Amount: {getprices[1][ii][0]}")
 
 
 
@@ -202,20 +202,20 @@ elif w3.eth.chainId == 137:
 
 
 
-# TradingCheck = contract.functions.TradeDirectlyByPair(majoraddresses,path,int(token_contract1.functions.balanceOf(pk.address).call()/2),pk.address,0,1).call(***REMOVED***"from":pk.address,"gasPrice":50000000000***REMOVED***)
+# TradingCheck = contract.functions.TradeDirectlyByPair(majoraddresses,path,int(token_contract1.functions.balanceOf(pk.address).call()/2),pk.address,0,1).call({"from":pk.address,"gasPrice":50000000000})
 # print("TradingCheck: ",TradingCheck)
 
 
 # Tradecheck = contract.functions.directSwapBuyAndSell()
 
-# tx = token_contract1.functions.approve("0x10ED43C718714eb63d5aA57B78B54704E256024E",115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction(***REMOVED***"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000***REMOVED***)
+# tx = token_contract1.functions.approve("0x10ED43C718714eb63d5aA57B78B54704E256024E",115792089237316195423570985008687907853269984665640564039457584007913129639935).buildTransaction({"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000})
 # signed_tx = pk.sign_transaction(tx)
 # txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 # receipt = w3.eth.waitForTransactionReceipt(txx)
 # print("Approval WETH: ",w3.toHex(txx))
 
 # try:
-#     tx = contract.functions.RouterSwapBySplit(*buy_args_3,[0,token_contract1.functions.balanceOf(pk.address).call()],pk.address,1).buildTransaction(***REMOVED***"value":0,"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":6000000000***REMOVED***)
+#     tx = contract.functions.RouterSwapBySplit(*buy_args_3,[0,token_contract1.functions.balanceOf(pk.address).call()],pk.address,1).buildTransaction({"value":0,"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":6000000000})
 #     signed_tx = pk.sign_transaction(tx)
 #     txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 #     tx_receipt = w3.eth.waitForTransactionReceipt(txx)
@@ -226,14 +226,14 @@ elif w3.eth.chainId == 137:
 #     exit();
     
 
-# hp_check = contract.functions.HoneyPotCheck(*buy_args_1[:2],1).call(***REMOVED***"from":pk.address,"value":1000000000000000000***REMOVED***)
+# hp_check = contract.functions.HoneyPotCheck(*buy_args_1[:2],1).call({"from":pk.address,"value":1000000000000000000})
 
 # tx = contract.functions.GetBalance("0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c").call()
 
 # tx = weth.functions.balanceOf(pk.address).call(),weth.functions.balanceOf(contract_address).call(),w3.eth.getBalance(pk.address)
 # print("Before: ",tx)
 
-# tx = weth.functions.withdraw(tx[0]).buildTransaction(***REMOVED***"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000***REMOVED***)
+# tx = weth.functions.withdraw(tx[0]).buildTransaction({"from":pk.address,"nonce":w3.eth.getTransactionCount(pk.address),"gasPrice":5000000000})
 # signed_tx = pk.sign_transaction(tx)
 # txx = w3.eth.sendRawTransaction(signed_tx.rawTransaction) 
 

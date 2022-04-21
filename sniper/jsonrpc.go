@@ -17,16 +17,16 @@ var Quit chan (bool) = make(chan bool)
 
 // Read pending transaction from mempool
 
-func (client *MainClient) SubscribePendingTx() ***REMOVED***
+func (client *MainClient) SubscribePendingTx() {
 	utils.ColorPrint("Scanning Mempool txs activated!", "yellow")
 	logs := make(chan *common.Hash)
 	context := context.Background()
 	sub, err := client.Rpc.EthSubscribe(context, logs, "newPendingTransactions")
-	if err != nil ***REMOVED***
+	if err != nil {
 		fmt.Println("Error During Sub1: ", err)
-	***REMOVED***
-	for ***REMOVED***
-		select ***REMOVED***
+	}
+	for {
+		select {
 		case err := <-sub.Err():
 			fmt.Println("Error During Sub2: ", err)
 		case vLog := <-logs:
@@ -34,36 +34,36 @@ func (client *MainClient) SubscribePendingTx() ***REMOVED***
 			// client.WaitGroup.Add(1)
 			// fmt.Println(*vLog)
 			go client.ProcessMempool(*vLog)
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	//client.Client.PendingTransactionCount()Call(&txs, "eth_pendingTransactions"
-***REMOVED***
+}
 
-func (client *MainClient) ToCallArg(msg ethereum.CallMsg) interface***REMOVED******REMOVED*** ***REMOVED***
-	arg := map[string]interface***REMOVED******REMOVED******REMOVED***
+func (client *MainClient) ToCallArg(msg ethereum.CallMsg) interface{} {
+	arg := map[string]interface{}{
 		"from": msg.From,
 		"to":   msg.To,
-	***REMOVED***
-	if len(msg.Data) > 0 ***REMOVED***
+	}
+	if len(msg.Data) > 0 {
 		arg["data"] = hexutil.Bytes(msg.Data)
-	***REMOVED***
-	if msg.Value != nil ***REMOVED***
+	}
+	if msg.Value != nil {
 		arg["value"] = (*hexutil.Big)(msg.Value)
-	***REMOVED***
-	if msg.Gas != 0 ***REMOVED***
+	}
+	if msg.Gas != 0 {
 		arg["gas"] = hexutil.Uint64(msg.Gas)
-	***REMOVED***
-	if msg.GasPrice != nil ***REMOVED***
+	}
+	if msg.GasPrice != nil {
 		arg["gasPrice"] = (*hexutil.Big)(msg.GasPrice)
-	***REMOVED***
+	}
 	return arg
-***REMOVED***
+}
 
-func (client *MainClient) EthCall(msg interface***REMOVED******REMOVED***, args ...interface***REMOVED******REMOVED***) ([]byte, error) ***REMOVED***
-	// var res interface***REMOVED******REMOVED***
-	// var args map[string]interface***REMOVED******REMOVED***
-	// args = make(map[string]interface***REMOVED******REMOVED***)
+func (client *MainClient) EthCall(msg interface{}, args ...interface{}) ([]byte, error) {
+	// var res interface{}
+	// var args map[string]interface{}
+	// args = make(map[string]interface{})
 	// args["to"] = "0x0000000000000000000000000000000000000000"
 	// cli := client.Rpc.Call(&res, "eth_call")
 	// _ = cli
@@ -72,35 +72,35 @@ func (client *MainClient) EthCall(msg interface***REMOVED******REMOVED***, args 
 	var hex hexutil.Bytes
 	// client.Rpc.CallContext()
 	err := client.Rpc.CallContext(ctx, &hex, "eth_call", msg, args)
-	if err != nil ***REMOVED***
+	if err != nil {
 		return nil, err
-	***REMOVED***
+	}
 	return hex, nil
 
-***REMOVED***
+}
 
-func (client *MainClient) GetETHPriceFromFeed() (*big.Int, error) ***REMOVED***
+func (client *MainClient) GetETHPriceFromFeed() (*big.Int, error) {
 	var hex1 hexutil.Bytes
 	// fmt.Println("DataFeed: ", client.Network.DataFeed, client.Network.DataFeed == " ", client.Network.DataFeed == "")
-	if client.Network.DataFeed == "" ***REMOVED***
+	if client.Network.DataFeed == "" {
 		// fmt.Println("DataFeed: ", client.Network.DataFeed, client.Network.DataFeed == " ", client.Network.DataFeed == "")
 		return nil, errors.New("No Data Feed")
-	***REMOVED***
+	}
 	encodedfunc := "0xfeaf968c"
-	arg := map[string]interface***REMOVED******REMOVED******REMOVED***
+	arg := map[string]interface{}{
 		"from": client.WalletAuths[0].From,
 		"to":   common.HexToAddress(client.Network.DataFeed),
 		"data": encodedfunc,
-	***REMOVED***
+	}
 	err := client.Rpc.Call(&hex1, "eth_call", arg, "latest")
-	if err != nil ***REMOVED***
+	if err != nil {
 		return nil, err
-	***REMOVED***
+	}
 	decodebyte := hex.EncodeToString(hex1[32:64])
 	nn, success := new(big.Int).SetString(decodebyte, 16)
-	if success == false ***REMOVED***
+	if success == false {
 		return nil, errors.New("Error in converting hex to big int")
-	***REMOVED***
+	}
 	nn = nn.Mul(nn, big.NewInt(10000000000))
 	return nn, nil
-***REMOVED***
+}

@@ -8,84 +8,84 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
-// func GetRouter(address common.Address, client *ethclient.Client) *Unirouter ***REMOVED***
+// func GetRouter(address common.Address, client *ethclient.Client) *Unirouter {
 // 	contract, err := NewUnirouter(address, client)
-// 	if err != nil ***REMOVED***
+// 	if err != nil {
 // 		panic(err)
-// 	***REMOVED***
+// 	}
 // 	return contract
-// ***REMOVED***
+// }
 
-// func GetFactory(address common.Address, client *ethclient.Client) *Unifactory ***REMOVED***
+// func GetFactory(address common.Address, client *ethclient.Client) *Unifactory {
 // 	contract, err := NewUnifactory(address, client)
-// 	if err != nil ***REMOVED***
+// 	if err != nil {
 // 		panic(err)
-// 	***REMOVED***
+// 	}
 // 	return contract
-// ***REMOVED***
+// }
 
-// func GetErc20(address common.Address, client *ethclient.Client) *Erc20 ***REMOVED***
+// func GetErc20(address common.Address, client *ethclient.Client) *Erc20 {
 // 	contract, err := NewErc20(address, client)
-// 	if err != nil ***REMOVED***
+// 	if err != nil {
 // 		panic(err)
-// 	***REMOVED***
+// 	}
 // 	return contract
-// ***REMOVED***
+// }
 
-// func GetPair(address common.Address, client *ethclient.Client) *Pair ***REMOVED***
+// func GetPair(address common.Address, client *ethclient.Client) *Pair {
 // 	contract, err := NewPair(address, client)
-// 	if err != nil ***REMOVED***
+// 	if err != nil {
 // 		panic(err)
-// 	***REMOVED***
+// 	}
 // 	return contract
-// ***REMOVED***
+// }
 
 type (
-	Token struct ***REMOVED***
+	Token struct {
 		Address  common.Address
 		Name     string
 		Symbol   string
 		Decimals *big.Int
 		Contract ERC20
-	***REMOVED***
+	}
 )
 
-func GetContract(address common.Address, client *ethclient.Client, contract_type string) interface***REMOVED******REMOVED*** ***REMOVED***
-	var contract interface***REMOVED******REMOVED***
-	if contract_type == "router" ***REMOVED***
+func GetContract(address common.Address, client *ethclient.Client, contract_type string) interface{} {
+	var contract interface{}
+	if contract_type == "router" {
 		contract, _ = NewUnirouter(address, client)
-	***REMOVED*** else if contract_type == "factory" ***REMOVED***
+	} else if contract_type == "factory" {
 		contract, _ = NewUnifactory(address, client)
-	***REMOVED*** else if contract_type == "erc20" || contract_type == "token" ***REMOVED***
+	} else if contract_type == "erc20" || contract_type == "token" {
 		TOKEN, _ := NewERC20(address, client)
-		Name, err := TOKEN.Name(&bind.CallOpts***REMOVED******REMOVED***)
-		if err != nil ***REMOVED***
+		Name, err := TOKEN.Name(&bind.CallOpts{})
+		if err != nil {
 			Name = "Not Found!"
-		***REMOVED***
-		Symbol, err := TOKEN.Symbol(&bind.CallOpts***REMOVED******REMOVED***)
-		if err != nil ***REMOVED***
+		}
+		Symbol, err := TOKEN.Symbol(&bind.CallOpts{})
+		if err != nil {
 			Symbol = "Not Found!"
-		***REMOVED***
-		Decimals, err := TOKEN.Decimals(&bind.CallOpts***REMOVED******REMOVED***)
-		if err != nil ***REMOVED***
+		}
+		Decimals, err := TOKEN.Decimals(&bind.CallOpts{})
+		if err != nil {
 			Decimals = uint8(0)
-		***REMOVED***
-		Token1 := Token***REMOVED***
+		}
+		Token1 := Token{
 			Address:  address,
 			Name:     Name,
 			Symbol:   Symbol,
 			Decimals: new(big.Int).SetUint64(uint64(Decimals)),
 			Contract: *TOKEN,
-		***REMOVED***
+		}
 		contract = &Token1
-	***REMOVED*** else if contract_type == "pair" ***REMOVED***
+	} else if contract_type == "pair" {
 		contract, _ = NewPair(address, client)
-	***REMOVED*** else if contract_type == "sniper" ***REMOVED***
+	} else if contract_type == "sniper" {
 		contract, _ = NewGoSniper(address, client)
-	***REMOVED*** else if contract_type == "weth" ***REMOVED***
+	} else if contract_type == "weth" {
 		contract, _ = NewWETH(address, client)
-	***REMOVED*** else ***REMOVED***
+	} else {
 		panic("Unknown contract type")
-	***REMOVED***
+	}
 	return contract
-***REMOVED***
+}

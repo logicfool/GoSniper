@@ -48,10 +48,10 @@ else:
         exit()
         
 constructed_tx = contract.constructor(weth,chigas)
-tx_params = ***REMOVED***
+tx_params = {
     "from": wallet.address,
     "nonce": w3.eth.getTransactionCount(wallet.address),
-***REMOVED***
+}
 tx = constructed_tx.buildTransaction(tx_params)
 estimategas = w3.eth.estimateGas(tx)
 tx['gas'] = estimategas

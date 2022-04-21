@@ -9,13 +9,13 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 )
 
-func (client *MainClient) GenerateWallets(num int) ***REMOVED***
+func (client *MainClient) GenerateWallets(num int) {
 	var all_wallets []*bind.TransactOpts
-	for i := 0; i < num; i++ ***REMOVED***
+	for i := 0; i < num; i++ {
 		privateKey, err := crypto.GenerateKey()
-		if err != nil ***REMOVED***
+		if err != nil {
 			log.Fatal(err)
-		***REMOVED***
+		}
 
 		private_key_bytes := crypto.FromECDSA(privateKey)
 		private_key_string := hexutil.Encode(private_key_bytes)[2:]
@@ -23,5 +23,5 @@ func (client *MainClient) GenerateWallets(num int) ***REMOVED***
 		wallet_bind := GetAccountAuth(client.Client, private_key_string, int(client.Network.Id), client.Network.GasPrice, client.Network.GasLimit)
 		all_wallets = append(all_wallets, wallet_bind)
 		client.Config.PrivateKeys = append(client.Config.PrivateKeys, private_key_string)
-	***REMOVED***
-***REMOVED***
+	}
+}

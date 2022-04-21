@@ -10,31 +10,31 @@ import (
 
 // conf, err := config.Read_config_from_file("config.json")
 
-func (client *MainClient) Start() ***REMOVED***
+func (client *MainClient) Start() {
 	// client.WaitGroup.Add(1)
-	if client.Sniper.MempoolLiquidityCheck ***REMOVED***
+	if client.Sniper.MempoolLiquidityCheck {
 		go client.SubscribePendingTx()
-	***REMOVED***
+	}
 	// utils.ColorPrint(fmt.Sprintf("Multi Main Wallet: %v", client.Sniper.MutliMainSnipe), "yellow")
 	// os.Exit(0)
 	// Buy Scope
-	// for client.Sniper.ToBuy ***REMOVED***
+	// for client.Sniper.ToBuy {
 	// 	// _ = Eligible_wallets
 	// 	// client.BuyTokenWithPair()
-	// ***REMOVED***
+	// }
 	client.PreTxCheckandGetWallets()
 
 	// Sell Scope
-	// for client.Sniper.ToSell ***REMOVED***
+	// for client.Sniper.ToSell {
 	// 	client.PreTxCheckandGetWallets()
 	// 	// _ = Eligible_wallets
 	// 	client.BuyTokenWithPair()
-	// ***REMOVED***
+	// }
 	client.WaitGroup.Wait()
 	// client.Stop()
-***REMOVED***
+}
 
-func (client *MainClient) Stop() ***REMOVED***
+func (client *MainClient) Stop() {
 	client.Sniper.ToBuy = false
 	client.Sniper.ToSell = false
 	utils.ColorPrint("Stopping Sniper", "yellow")
@@ -44,4 +44,4 @@ func (client *MainClient) Stop() ***REMOVED***
 	// client.WaitGroup.Done()
 
 	// os.Exit(0)
-***REMOVED***
+}

@@ -14,7 +14,7 @@ import (
 
 // A back Compatibility with Routers in Case The Contract is not deployed on a chain
 
-func (client *MainClient) LegacyRouterETHBuy(tokenAddress interface***REMOVED******REMOVED***, amount interface***REMOVED******REMOVED***, wallets_to_use interface***REMOVED******REMOVED***) []*types.Transaction ***REMOVED***
+func (client *MainClient) LegacyRouterETHBuy(tokenAddress interface{}, amount interface{}, wallets_to_use interface{}) []*types.Transaction {
 	var weth common.Address
 	var exchange structs.Exchange
 	var path []common.Address
@@ -23,55 +23,55 @@ func (client *MainClient) LegacyRouterETHBuy(tokenAddress interface***REMOVED***
 	var tx_hashes []*types.Transaction
 	// if tokenAddress is a string, convert it to a common.Address
 	exchange = client.MainExchange
-	weth, _ = exchange.Router.WETH(&bind.CallOpts***REMOVED******REMOVED***)
+	weth, _ = exchange.Router.WETH(&bind.CallOpts{})
 
 	// fmt.Println(exchange)
-	switch tokenAddress.(type) ***REMOVED***
+	switch tokenAddress.(type) {
 	case string:
-		path = []common.Address***REMOVED***weth, utils.ToChecksumAddress(tokenAddress.(string))***REMOVED***
+		path = []common.Address{weth, utils.ToChecksumAddress(tokenAddress.(string))}
 
 	case []common.Address:
 		path = tokenAddress.([]common.Address)
-	***REMOVED***
-	switch amount.(type) ***REMOVED***
+	}
+	switch amount.(type) {
 	case *big.Int:
 		buy_amount = amount.(*big.Int)
 	case *big.Float:
 		buy_amount = utils.FloatToBigInt(amount.(*big.Float))
 	case int:
 		buy_amount = big.NewInt(int64(amount.(int)))
-	***REMOVED***
+	}
 	// var pair =
 	// fmt.Println(path)
 	amountsout := client.GetAmountsOut(path, buy_amount, exchange)
 	minamountout := amountsout[len(amountsout)-1]
 	deadline := big.NewInt(time.Now().Add(time.Minute * 5).Unix())
 
-	if wallets_to_use == nil ***REMOVED***
+	if wallets_to_use == nil {
 		wallet_to_use = client.UpdateWalletAuthValues(buy_amount)
-	***REMOVED*** else ***REMOVED***
+	} else {
 		wallet_to_use = wallets_to_use.([]*bind.TransactOpts)
-	***REMOVED***
+	}
 
-	for _, wallet := range wallet_to_use ***REMOVED***
+	for _, wallet := range wallet_to_use {
 		// fmt.Println(wallet)
 		tx, err := exchange.Router.SwapExactETHForTokensSupportingFeeOnTransferTokens(wallet, minamountout, path, wallet.From, deadline)
-		if err != nil ***REMOVED***
+		if err != nil {
 			panic(err)
-		***REMOVED***
+		}
 		fmt.Printf("Tx Hash %v: %v\n", wallet.From.Hex(), tx.Hash().Hex())
 		tx_hashes = append(tx_hashes, tx)
-	***REMOVED***
+	}
 	//for each element in tx hashes get the receipt if successful or not
-	for _, tx := range tx_hashes ***REMOVED***
+	for _, tx := range tx_hashes {
 		receipt := client.GetTxReceipt(tx.Hash().Hex())
-		if receipt.Status == 1 ***REMOVED***
+		if receipt.Status == 1 {
 			fmt.Printf("Tx %v: Successful\n", tx.Hash().Hex())
-		***REMOVED*** else ***REMOVED***
+		} else {
 			fmt.Printf("Tx %v: Failed\n", tx.Hash().Hex())
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 	return tx_hashes
 	// fmt.Printf("%T", contract)
 	// make sure amount is already in wei and not in ether
-***REMOVED***
+}

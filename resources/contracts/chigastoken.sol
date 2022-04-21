@@ -62,30 +62,30 @@ pragma solidity ^0.8.0;
 /**
  * @dev Standard math utilities missing in the Solidity language.
  */
-library Math ***REMOVED***
+library Math {
     /**
      * @dev Returns the largest of two numbers.
      */
-    function max(uint256 a, uint256 b) internal pure returns (uint256) ***REMOVED***
+    function max(uint256 a, uint256 b) internal pure returns (uint256) {
         return a >= b ? a : b;
-***REMOVED***
+    }
 
     /**
      * @dev Returns the smallest of two numbers.
      */
-    function min(uint256 a, uint256 b) internal pure returns (uint256) ***REMOVED***
+    function min(uint256 a, uint256 b) internal pure returns (uint256) {
         return a < b ? a : b;
-***REMOVED***
+    }
 
     /**
      * @dev Returns the average of two numbers. The result is rounded towards
      * zero.
      */
-    function average(uint256 a, uint256 b) internal pure returns (uint256) ***REMOVED***
+    function average(uint256 a, uint256 b) internal pure returns (uint256) {
         // (a + b) / 2 can overflow, so we distribute
         return (a / 2) + (b / 2) + ((a % 2 + b % 2) / 2);
-***REMOVED***
-***REMOVED***
+    }
+}
 
 // File: @openzeppelin/contracts/math/SafeMath.sol
 
@@ -104,7 +104,7 @@ pragma solidity ^0.8.0;
  * Using this library instead of the unchecked operations eliminates an entire
  * class of bugs, so it's recommended to use it always.
  */
-library SafeMath ***REMOVED***
+library SafeMath {
     /**
      * @dev Returns the addition of two unsigned integers, reverting on
      * overflow.
@@ -114,12 +114,12 @@ library SafeMath ***REMOVED***
      * Requirements:
      * - Addition cannot overflow.
      */
-    function add(uint256 a, uint256 b) internal pure returns (uint256) ***REMOVED***
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
         uint256 c = a + b;
         require(c >= a, "SafeMath: addition overflow");
 
         return c;
-***REMOVED***
+    }
 
     /**
      * @dev Returns the subtraction of two unsigned integers, reverting on
@@ -130,9 +130,9 @@ library SafeMath ***REMOVED***
      * Requirements:
      * - Subtraction cannot overflow.
      */
-    function sub(uint256 a, uint256 b) internal pure returns (uint256) ***REMOVED***
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
         return sub(a, b, "SafeMath: subtraction overflow");
-***REMOVED***
+    }
 
     /**
      * @dev Returns the subtraction of two unsigned integers, reverting with custom message on
@@ -143,12 +143,12 @@ library SafeMath ***REMOVED***
      * Requirements:
      * - Subtraction cannot overflow.
      */
-    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) ***REMOVED***
+    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
         require(b <= a, errorMessage);
         uint256 c = a - b;
 
         return c;
-***REMOVED***
+    }
 
     /**
      * @dev Returns the multiplication of two unsigned integers, reverting on
@@ -159,19 +159,19 @@ library SafeMath ***REMOVED***
      * Requirements:
      * - Multiplication cannot overflow.
      */
-    function mul(uint256 a, uint256 b) internal pure returns (uint256) ***REMOVED***
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
         // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
         // benefit is lost if 'b' is also tested.
         // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
-        if (a == 0) ***REMOVED***
+        if (a == 0) {
             return 0;
-    ***REMOVED***
+        }
 
         uint256 c = a * b;
         require(c / a == b, "SafeMath: multiplication overflow");
 
         return c;
-***REMOVED***
+    }
 
     /**
      * @dev Returns the integer division of two unsigned integers. Reverts on
@@ -184,9 +184,9 @@ library SafeMath ***REMOVED***
      * Requirements:
      * - The divisor cannot be zero.
      */
-    function div(uint256 a, uint256 b) internal pure returns (uint256) ***REMOVED***
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
         return div(a, b, "SafeMath: division by zero");
-***REMOVED***
+    }
 
     /**
      * @dev Returns the integer division of two unsigned integers. Reverts with custom message on
@@ -199,14 +199,14 @@ library SafeMath ***REMOVED***
      * Requirements:
      * - The divisor cannot be zero.
      */
-    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) ***REMOVED***
+    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
         // Solidity only automatically asserts when dividing by 0
         require(b > 0, errorMessage);
         uint256 c = a / b;
         // assert(a == b * c + a % b); // There is no case in which this doesn't hold
 
         return c;
-***REMOVED***
+    }
 
     /**
      * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
@@ -219,9 +219,9 @@ library SafeMath ***REMOVED***
      * Requirements:
      * - The divisor cannot be zero.
      */
-    function mod(uint256 a, uint256 b) internal pure returns (uint256) ***REMOVED***
+    function mod(uint256 a, uint256 b) internal pure returns (uint256) {
         return mod(a, b, "SafeMath: modulo by zero");
-***REMOVED***
+    }
 
     /**
      * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
@@ -234,11 +234,11 @@ library SafeMath ***REMOVED***
      * Requirements:
      * - The divisor cannot be zero.
      */
-    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) ***REMOVED***
+    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
         require(b != 0, errorMessage);
         return a % b;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 // File: @openzeppelin/contracts/token/ERC20/IERC20.sol
 
@@ -247,7 +247,7 @@ pragma solidity ^0.8.0;
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
  */
-interface IERC20 ***REMOVED***
+interface IERC20 {
     /**
      * @dev Returns the amount of tokens in existence.
      */
@@ -263,16 +263,16 @@ interface IERC20 ***REMOVED***
      *
      * Returns a boolean value indicating whether the operation succeeded.
      *
-     * Emits a ***REMOVED***Transfer***REMOVED*** event.
+     * Emits a {Transfer} event.
      */
     function transfer(address recipient, uint256 amount) external returns (bool);
 
     /**
      * @dev Returns the remaining number of tokens that `spender` will be
-     * allowed to spend on behalf of `owner` through ***REMOVED***transferFrom***REMOVED***. This is
+     * allowed to spend on behalf of `owner` through {transferFrom}. This is
      * zero by default.
      *
-     * This value changes when ***REMOVED***approve***REMOVED*** or ***REMOVED***transferFrom***REMOVED*** are called.
+     * This value changes when {approve} or {transferFrom} are called.
      */
     function allowance(address owner, address spender) external view returns (uint256);
 
@@ -288,7 +288,7 @@ interface IERC20 ***REMOVED***
      * desired value afterwards:
      * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
      *
-     * Emits an ***REMOVED***Approval***REMOVED*** event.
+     * Emits an {Approval} event.
      */
     function approve(address spender, uint256 amount) external returns (bool);
 
@@ -299,7 +299,7 @@ interface IERC20 ***REMOVED***
      *
      * Returns a boolean value indicating whether the operation succeeded.
      *
-     * Emits a ***REMOVED***Transfer***REMOVED*** event.
+     * Emits a {Transfer} event.
      */
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
 
@@ -313,10 +313,10 @@ interface IERC20 ***REMOVED***
 
     /**
      * @dev Emitted when the allowance of a `spender` for an `owner` is set by
-     * a call to ***REMOVED***approve***REMOVED***. `value` is the new allowance.
+     * a call to {approve}. `value` is the new allowance.
      */
     event Approval(address indexed owner, address indexed spender, uint256 value);
-***REMOVED***
+}
 
 // File: contracts/ChiToken.sol
 
@@ -326,65 +326,65 @@ pragma solidity ^0.8.0;
 
 
 
-abstract contract ERC20WithoutTotalSupply is IERC20 ***REMOVED***
+abstract contract ERC20WithoutTotalSupply is IERC20 {
     using SafeMath for uint256;
 
     mapping(address => uint256) private _balances;
     mapping(address => mapping(address => uint256)) private _allowances;
 
-    function balanceOf(address account) public view override returns (uint256) ***REMOVED***
+    function balanceOf(address account) public view override returns (uint256) {
         return _balances[account];
-***REMOVED***
+    }
 
-    function allowance(address owner, address spender) public view override returns (uint256) ***REMOVED***
+    function allowance(address owner, address spender) public view override returns (uint256) {
         return _allowances[owner][spender];
-***REMOVED***
+    }
 
-    function transfer(address recipient, uint256 amount) public override returns (bool) ***REMOVED***
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
         _transfer(msg.sender, recipient, amount);
         return true;
-***REMOVED***
+    }
 
-    function approve(address spender, uint256 amount) public override returns (bool) ***REMOVED***
+    function approve(address spender, uint256 amount) public override returns (bool) {
         _approve(msg.sender, spender, amount);
         return true;
-***REMOVED***
+    }
 
-    function transferFrom(address sender, address recipient, uint256 amount) public override returns (bool) ***REMOVED***
+    function transferFrom(address sender, address recipient, uint256 amount) public override returns (bool) {
         _transfer(sender, recipient, amount);
         _approve(sender, msg.sender, _allowances[sender][msg.sender].sub(amount, "ERC20: transfer amount exceeds allowance"));
         return true;
-***REMOVED***
+    }
 
-    function _transfer(address sender, address recipient, uint256 amount) internal ***REMOVED***
+    function _transfer(address sender, address recipient, uint256 amount) internal {
         _balances[sender] = _balances[sender].sub(amount, "ERC20: transfer amount exceeds balance");
         _balances[recipient] = _balances[recipient].add(amount);
         emit Transfer(sender, recipient, amount);
-***REMOVED***
+    }
 
-    function _approve(address owner, address spender, uint256 amount) internal ***REMOVED***
+    function _approve(address owner, address spender, uint256 amount) internal {
         _allowances[owner][spender] = amount;
         emit Approval(owner, spender, amount);
-***REMOVED***
+    }
 
-    function _mint(address account, uint256 amount) internal ***REMOVED***
+    function _mint(address account, uint256 amount) internal {
         _balances[account] = _balances[account].add(amount);
         emit Transfer(address(0), account, amount);
-***REMOVED***
+    }
 
-    function _burn(address account, uint256 amount) internal ***REMOVED***
+    function _burn(address account, uint256 amount) internal {
         _balances[account] = _balances[account].sub(amount, "ERC20: burn amount exceeds balance");
         emit Transfer(account, address(0), amount);
-***REMOVED***
+    }
 
-    function _burnFrom(address account, uint256 amount) internal ***REMOVED***
+    function _burnFrom(address account, uint256 amount) internal {
         _burn(account, amount);
         _approve(account, msg.sender, _allowances[account][msg.sender].sub(amount, "ERC20: burn amount exceeds allowance"));
-***REMOVED***
-***REMOVED***
+    }
+}
 
 
-contract ChiToken is IERC20, ERC20WithoutTotalSupply ***REMOVED***
+contract ChiToken is IERC20, ERC20WithoutTotalSupply {
     using SafeMath for uint256;
     string constant public name = "Chi Gastoken by 1inch";
     string constant public symbol = "CHI";
@@ -393,16 +393,16 @@ contract ChiToken is IERC20, ERC20WithoutTotalSupply ***REMOVED***
     uint256 public totalMinted;
     uint256 public totalBurned;
 
-    function totalSupply() public view override returns(uint256) ***REMOVED***
+    function totalSupply() public view override returns(uint256) {
         return totalMinted.sub(totalBurned);
-***REMOVED***
+    }
 
-    function mint(uint256 value) public ***REMOVED***
+    function mint(uint256 value) public {
         uint256 offset = totalMinted;
-        assembly ***REMOVED***
+        assembly {
             mstore(0, 0x746d4946c0e9F43F4Dee607b0eF1fA1c3318585733ff6000526015600bf30000)
 
-            for ***REMOVED***let i := div(value, 32)***REMOVED*** i ***REMOVED***i := sub(i, 1)***REMOVED*** ***REMOVED***
+            for {let i := div(value, 32)} i {i := sub(i, 1)} {
                 pop(create2(0, 0, 30, add(offset, 0))) pop(create2(0, 0, 30, add(offset, 1)))
                 pop(create2(0, 0, 30, add(offset, 2))) pop(create2(0, 0, 30, add(offset, 3)))
                 pop(create2(0, 0, 30, add(offset, 4))) pop(create2(0, 0, 30, add(offset, 5)))
@@ -420,50 +420,50 @@ contract ChiToken is IERC20, ERC20WithoutTotalSupply ***REMOVED***
                 pop(create2(0, 0, 30, add(offset, 28))) pop(create2(0, 0, 30, add(offset, 29)))
                 pop(create2(0, 0, 30, add(offset, 30))) pop(create2(0, 0, 30, add(offset, 31)))
                 offset := add(offset, 32)
-        ***REMOVED***
+            }
 
-            for ***REMOVED***let i := and(value, 0x1F)***REMOVED*** i ***REMOVED***i := sub(i, 1)***REMOVED*** ***REMOVED***
+            for {let i := and(value, 0x1F)} i {i := sub(i, 1)} {
                 pop(create2(0, 0, 30, offset))
                 offset := add(offset, 1)
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         _mint(msg.sender, value);
         totalMinted = offset;
-***REMOVED***
+    }
 
-    function computeAddress2(uint256 salt) public view returns (address) ***REMOVED***
+    function computeAddress2(uint256 salt) public view returns (address) {
         bytes32 _data = keccak256(
             abi.encodePacked(bytes1(0xff), address(this), salt, bytes32(0x3c1644c68e5d6cb380c36d1bf847fdbc0c7ac28030025a2fc5e63cce23c16348))
         );
         return address(0x0); //address(uint256(_data));
-***REMOVED***
+    }
 
-    function _destroyChildren(uint256 value) internal ***REMOVED***
+    function _destroyChildren(uint256 value) internal {
         uint256 _totalBurned = totalBurned;
-        for (uint256 i = 0; i < value; i++) ***REMOVED***
+        for (uint256 i = 0; i < value; i++) {
             computeAddress2(_totalBurned + i).call("");
-    ***REMOVED***
+        }
         totalBurned = _totalBurned + value;
-***REMOVED***
+    }
 
-    function free(uint256 value) public returns (uint256)  ***REMOVED***
+    function free(uint256 value) public returns (uint256)  {
         _burn(msg.sender, value);
         _destroyChildren(value);
         return value;
-***REMOVED***
+    }
 
-    function freeUpTo(uint256 value) public returns (uint256) ***REMOVED***
+    function freeUpTo(uint256 value) public returns (uint256) {
         return free(Math.min(value, balanceOf(msg.sender)));
-***REMOVED***
+    }
 
-    function freeFrom(address from, uint256 value) public returns (uint256) ***REMOVED***
+    function freeFrom(address from, uint256 value) public returns (uint256) {
         _burnFrom(from, value);
         _destroyChildren(value);
         return value;
-***REMOVED***
+    }
 
-    function freeFromUpTo(address from, uint256 value) public returns (uint256) ***REMOVED***
+    function freeFromUpTo(address from, uint256 value) public returns (uint256) {
         return freeFrom(from, Math.min(Math.min(value, balanceOf(from)), allowance(from, msg.sender)));
-***REMOVED***
-***REMOVED***
+    }
+}

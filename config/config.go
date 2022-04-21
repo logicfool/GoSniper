@@ -11,47 +11,47 @@ import (
 	"github.com/logicfool/GoSniper/utils"
 )
 
-func Read_config_from_file(f string) (*structs.BaseConfig, error) ***REMOVED***
+func Read_config_from_file(f string) (*structs.BaseConfig, error) {
 	// if config file does not exist create one
-	if _, err := os.Stat(f); os.IsNotExist(err) ***REMOVED***
+	if _, err := os.Stat(f); os.IsNotExist(err) {
 		utils.ColorPrint("[+] Config file not found, creating one Edit and restart the bot!", "green")
 		config, err := Create_a_new_Config()
 		os.Exit(0)
 		return config, err
-	***REMOVED***
+	}
 	file, err := os.Open(f)
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	defer file.Close()
 
 	decoder := json.NewDecoder(file)
-	config := structs.BaseConfig***REMOVED******REMOVED***
+	config := structs.BaseConfig{}
 	err = decoder.Decode(&config)
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	return &config, nil
-***REMOVED***
+}
 
-func Create_a_new_Config() (*structs.BaseConfig, error) ***REMOVED***
-	config := structs.BaseConfig***REMOVED******REMOVED***
-	config.Chains = []structs.Network***REMOVED******REMOVED***
-	config.Exchanges = []structs.Exchanges***REMOVED******REMOVED***
-	config.PrivateKeys = []string***REMOVED******REMOVED***
-	config.Sniper = structs.SniperSettings***REMOVED******REMOVED***
+func Create_a_new_Config() (*structs.BaseConfig, error) {
+	config := structs.BaseConfig{}
+	config.Chains = []structs.Network{}
+	config.Exchanges = []structs.Exchanges{}
+	config.PrivateKeys = []string{}
+	config.Sniper = structs.SniperSettings{}
 	config.Sniper.Slippage = 5
 	config.Sniper.MultiWallet = false
 	config.Sniper.MinLiq = 0
 	config.Sniper.BuySplit = 1
 	config.Sniper.SellSplit = 1
 	config.Sniper.HoneyPotCheck = false
-	// ***REMOVED***"f305d719","e8e33700"***REMOVED***
-	config.Sniper.LiquidityAddFunctions = []string***REMOVED******REMOVED***
+	// {"f305d719","e8e33700"}
+	config.Sniper.LiquidityAddFunctions = []string{}
 	config.Sniper.LiquidityAddFunctions = append(config.Sniper.LiquidityAddFunctions, "f305d719")
 	config.Sniper.LiquidityAddFunctions = append(config.Sniper.LiquidityAddFunctions, "e8e33700")
 	// "baa2abde","02751cec","2195995c","ded9382a","af2979eb","7d72d6e0"
-	config.Sniper.LiquidityRemoveFunctions = []string***REMOVED******REMOVED***
+	config.Sniper.LiquidityRemoveFunctions = []string{}
 	config.Sniper.LiquidityRemoveFunctions = append(config.Sniper.LiquidityRemoveFunctions, "baa2abde")
 	config.Sniper.LiquidityRemoveFunctions = append(config.Sniper.LiquidityRemoveFunctions, "02751cec")
 	config.Sniper.LiquidityRemoveFunctions = append(config.Sniper.LiquidityRemoveFunctions, "2195995c")
@@ -60,13 +60,13 @@ func Create_a_new_Config() (*structs.BaseConfig, error) ***REMOVED***
 	config.Sniper.LiquidityRemoveFunctions = append(config.Sniper.LiquidityRemoveFunctions, "7d72d6e0")
 	config.Sniper.ChiGasEnabled = false
 	config.Sniper.AdvancedLiquiditySniping = false
-	network := structs.Network***REMOVED******REMOVED***
+	network := structs.Network{}
 	network.RPC = "http://localhost:8545"
 	network.Id = 0
 	network.Name = "Local"
 	config.Chains = append(config.Chains, network)
 
-	exchange := structs.Exchanges***REMOVED******REMOVED***
+	exchange := structs.Exchanges{}
 	exchange.ChainId = 1
 	exchange.Name = "Dummy"
 	exchange.Router = "0xdummya6f5b5e8d8c5b9a8f8c8c8d8d8c5b9a8f8c"
@@ -74,57 +74,69 @@ func Create_a_new_Config() (*structs.BaseConfig, error) ***REMOVED***
 	exchange.Init_code = "get init_code from pairfor function of router contract search its source code and get it from there"
 	config.Exchanges = append(config.Exchanges, exchange)
 
-	private_key := structs.PrivateKey***REMOVED******REMOVED***
+	private_key := structs.PrivateKey{}
 	private_key.Key = "private_key_here"
 	config.PrivateKeys = append(config.PrivateKeys, private_key.Key)
 
 	file, err := os.Create("config.json")
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 
 	encoder := json.NewEncoder(file)
 	encoder.SetIndent("", "  ")
 	err = encoder.Encode(config)
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	file.Close()
 	return &config, nil
-***REMOVED***
+}
 
-func Update_and_save_new_config(conff structs.BaseConfig) ***REMOVED***
+func Update_and_save_new_config(conff structs.BaseConfig) {
 	file, err := os.Open("config.json")
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	defer file.Close()
 
 	decoder := json.NewDecoder(file)
-	config := structs.BaseConfig***REMOVED******REMOVED***
+	config := structs.BaseConfig{}
 	err = decoder.Decode(&config)
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	config.Chains = conff.Chains
 	config.Exchanges = conff.Exchanges
 	config.PrivateKeys = conff.PrivateKeys
-	config.Sniper = conff.Sniper
+	config.Sniper = structs.SniperSettings{}
+	config.Sniper.Slippage = conff.Sniper.Slippage
+	config.Sniper.MultiWallet = conff.Sniper.MultiWallet
+	config.Sniper.MinLiq = conff.Sniper.MinLiq
+	config.Sniper.BuySplit = conff.Sniper.BuySplit
+	config.Sniper.SellSplit = conff.Sniper.SellSplit
+	config.Sniper.HoneyPotCheck = conff.Sniper.HoneyPotCheck
+	config.Sniper.LiquidityAddFunctions = conff.Sniper.LiquidityAddFunctions
+	config.Sniper.LiquidityRemoveFunctions = conff.Sniper.LiquidityRemoveFunctions
+	config.Sniper.ChiGasEnabled = conff.Sniper.ChiGasEnabled
+	config.Sniper.GasLimit = conff.Sniper.GasLimit
+	// config.Sniper.
+	// config.Sniper = conff.Sniper
 	file, err = os.Create("config.json")
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	encoder := json.NewEncoder(file)
 	encoder.SetIndent("", "  ")
 	err = encoder.Encode(config)
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	file.Close()
 
-***REMOVED***
+}
 
-func ParseArgsAndConfig() *structs.BaseConfig ***REMOVED***
+func ParseArgsAndConfig() *structs.BaseConfig {
 	/* Flasg are gonna be:
 	--token : string "Token to buy"
 	--pair : string "To buy token in a different pair"
@@ -142,9 +154,9 @@ func ParseArgsAndConfig() *structs.BaseConfig ***REMOVED***
 	--dtc : bool "Disable Trading Check"
 	*/
 	configf, err := Read_config_from_file("config.json")
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	// token := flag.String("token", "0x0", "Token to buy")
 	help := flag.Bool("help", false, "Show Help")
 	pair := flag.String("pair", "0x0", "To buy token in a different pair")
@@ -171,8 +183,8 @@ func ParseArgsAndConfig() *structs.BaseConfig ***REMOVED***
 	stoploss := flag.Float64("stoploss", 0, "Stop Loss")
 	buyprice := flag.Float64("buyprice", 0.0, "Specific Buy Price Of token")
 	sellprice := flag.Float64("sellprice", 0.0, "Specific Sell Price Of token")
-	gasprice := flag.Int("gasprice", 0, "Gas Price")
-	gaslimit := flag.Int("gaslimit", 0, "Gas Limit")
+	gasprice := flag.Int("gasprice", configf.Sniper.GasPrice, "Gas Price")
+	gaslimit := flag.Int("gaslimit", configf.Sniper.GasLimit, "Gas Limit")
 	freefire := flag.Bool("freefire", false, "Fire Snipes till one of the tx succeeds")
 	freefirelimit := flag.Int("fflimit", 0, "Fire Snipes till one of the tx succeeds")
 	dreservechecks := flag.Bool("dreservechecks", false, "Disable Reserve Checks") //for tests!!
@@ -183,16 +195,16 @@ func ParseArgsAndConfig() *structs.BaseConfig ***REMOVED***
 	token := flag.Arg(0)
 	amount := flag.Arg(1)
 	// Some checks
-	if *help == true ***REMOVED***
+	if *help == true {
 		Showhelp()
 		os.Exit(0)
-	***REMOVED***
-	if *stoploss > 0 ***REMOVED***
+	}
+	if *stoploss > 0 {
 		stp := *stoploss
 		stp = (stp - float64(100))
 		stoploss = &stp
-	***REMOVED***
-	snipersettings := structs.SniperSettings***REMOVED******REMOVED***
+	}
+	snipersettings := structs.SniperSettings{}
 	// Save all the parsed parameters in SniperSettings
 	snipersettings.Token = common.HexToAddress(token)
 	snipersettings.Amount, _ = strconv.ParseFloat(amount, 64)
@@ -227,24 +239,24 @@ func ParseArgsAndConfig() *structs.BaseConfig ***REMOVED***
 	snipersettings.GasPrice = *gasprice
 	snipersettings.GasLimit = *gaslimit
 	snipersettings.NumberOfMultipleWallets = *NumberOfMultipleWallets
-	if *onlybuy == false && *onlysell == false ***REMOVED***
+	if *onlybuy == false && *onlysell == false {
 		snipersettings.ToBuy = true
 		snipersettings.ToSell = true
-	***REMOVED***
-	if *onlybuy == true ***REMOVED***
+	}
+	if *onlybuy == true {
 		snipersettings.ToBuy = true
 		snipersettings.ToSell = false
-	***REMOVED***
-	if *onlysell == true ***REMOVED***
+	}
+	if *onlysell == true {
 		snipersettings.ToBuy = false
 		snipersettings.ToSell = true
-	***REMOVED***
-	if *onlybuy == true && *onlysell == true ***REMOVED***
+	}
+	if *onlybuy == true && *onlysell == true {
 		utils.ColorPrint("[ERROR] You can't use Onlybuy and Only Sell at the same time! if you wana both buy and sell dont pass any of it", "red")
 		os.Exit(0)
-	***REMOVED***
+	}
 	configf.Sniper = snipersettings
 	return configf
-***REMOVED***
+}
 
 // func

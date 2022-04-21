@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	ZeroAddress         = common.Address***REMOVED******REMOVED***
+	ZeroAddress         = common.Address{}
 	MAX_APPROVAL_HEX    = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
 	MAX_APPROVAL_STRING = "11579208923731619542357098500868790785326998466564056403945758400"
 	MAX_APPROVAL_INT    = utils.StringToBigInt(MAX_APPROVAL_STRING)
@@ -26,9 +26,9 @@ var h [][]byte
 	h = append(h, []byte("removeLiquidityETHSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256)"))
 	h = append(h, []byte("removeLiquidityETHSupportingFeeOnTransferTokensWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32)"))
 
-	for _, v := range h ***REMOVED***
+	for _, v := range h {
 		fmt.Printf("%v: %v \n", string(v), utils.EncodeFunctionName(v))
-	***REMOVED***
+	}
 
 
 */

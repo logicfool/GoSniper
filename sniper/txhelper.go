@@ -9,47 +9,47 @@ import (
 	"github.com/logicfool/GoSniper/contracts"
 )
 
-func (client *MainClient) GetSignedRawTx(Wallet *bind.TransactOpts, function_name string, params ...interface***REMOVED******REMOVED***) *types.Transaction ***REMOVED***
+func (client *MainClient) GetSignedRawTx(Wallet *bind.TransactOpts, function_name string, params ...interface{}) *types.Transaction {
 	var data []byte
 	var err error
 	abi, _ := contracts.GoSniperMetaData.GetAbi()
 	data, err = abi.Pack(function_name, params...)
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	toaddr := client.MainExchange.SniperAddress
 	nonce := Noncehandler[Wallet.From]
-	baseTx := &types.LegacyTx***REMOVED***
+	baseTx := &types.LegacyTx{
 		To:       &toaddr,
 		Nonce:    uint64(nonce),
 		GasPrice: client.Session.GasPrice,
 		Gas:      client.Session.GasLimit,
 		Value:    Wallet.Value,
 		Data:     data,
-	***REMOVED***
+	}
 	txs := types.NewTx(baseTx)
 	signedTx, err := Wallet.Signer(Wallet.From, txs)
-	if err != nil ***REMOVED***
+	if err != nil {
 		panic(err)
-	***REMOVED***
+	}
 	return signedTx
 	// err = client.Client.SendTransaction(context.Background(), signedTx)
-	// if err != nil ***REMOVED***
+	// if err != nil {
 	// 	panic(err)
-	// ***REMOVED***
-***REMOVED***
+	// }
+}
 
-func (client *MainClient) SendRawTx(signedTx *types.Transaction) (common.Hash, error) ***REMOVED***
+func (client *MainClient) SendRawTx(signedTx *types.Transaction) (common.Hash, error) {
 	err := client.Client.SendTransaction(context.Background(), signedTx)
-	if err != nil ***REMOVED***
+	if err != nil {
 		return signedTx.Hash(), err
-	***REMOVED***
+	}
 	// signedTx
 	return signedTx.Hash(), nil
 
-***REMOVED***
+}
 
 // ----------------------------------------------------------------------------------------------------------------
-func (client *MainClient) FormAndSaverawTxs() ***REMOVED***
+func (client *MainClient) FormAndSaverawTxs() {
 
-***REMOVED***
+}

@@ -22,14 +22,14 @@ import (
 type (
 	// Address string
 
-	BaseConfig struct ***REMOVED***
+	BaseConfig struct {
 		Chains      []Network      `json:"networks"`
 		Exchanges   []Exchanges    `json:"exchanges"`
 		PrivateKeys []string       `json:"private_keys"`
 		Sniper      SniperSettings `json:"sniper"`
-	***REMOVED***
+	}
 
-	Network struct ***REMOVED***
+	Network struct {
 		RPC               string `json:"node_url"`
 		Id                int    `json:"chain_id"`
 		Name              string `json:"name"`
@@ -39,24 +39,24 @@ type (
 		GasLimit          int    `json:"gaslimit,omitempty"`
 		GasPrice          int    `json:"gasprice,omitempty"`
 		EIP1599Compatible bool   `json:"eip1599_compatible,omitempty"`
-	***REMOVED***
-	Contracts struct ***REMOVED***
-	***REMOVED***
+	}
+	Contracts struct {
+	}
 
-	Exchanges struct ***REMOVED***
+	Exchanges struct {
 		ChainId   int    `json:"network"`
 		Name      string `json:"name"`
 		Router    string `json:"router"`
 		Factory   string `json:"factory"`
 		HoneyPot  string `json:"honeypot"`
 		Init_code string `json:"init_code"`
-	***REMOVED***
+	}
 
-	PrivateKey struct ***REMOVED***
+	PrivateKey struct {
 		Key string
-	***REMOVED***
+	}
 
-	SniperSettings struct ***REMOVED***
+	SniperSettings struct {
 		Slippage                    int            `json:"slippage,omitempty"`
 		MultiWallet                 bool           `json:"multiwallet,omitempty"`
 		MinLiq                      float64        `json:"min_liquidity,omitempty"`
@@ -92,10 +92,10 @@ type (
 		GasLimit                    int            `json:",omitempty"`
 		FreeFireLimit               int            `json:",omitempty"`
 		NumberOfMultipleWallets     int            `json:",omitempty"`
-	***REMOVED***
+	}
 
 	// Exchanges is for baseconfig to read the data and then its converted to EXChange when setting up the main config...
-	Exchange struct ***REMOVED***
+	Exchange struct {
 		Name           string
 		Router         *contracts.Unirouter
 		Factory        *contracts.Unifactory
@@ -106,9 +106,9 @@ type (
 		Init_code      string
 		WETH           *contracts.WETH
 		WETHAddress    common.Address
-	***REMOVED***
+	}
 
-	CurrentSnipeSession struct ***REMOVED***
+	CurrentSnipeSession struct {
 		Token                  common.Address
 		Pair                   common.Address
 		TokenContract          *contracts.Token
@@ -139,7 +139,7 @@ type (
 		ExtraSettings          []*big.Int
 		Path                   []common.Address
 		// OneSuccessful          bool
-	***REMOVED***
+	}
 
 	LiquidityAddFunctions    map[string]string
 	LiquidityRemoveFunctions map[string]string
@@ -147,17 +147,17 @@ type (
 
 var (
 	// ZeroAddress is an address of all zeros
-	ZeroAddress = Address***REMOVED******REMOVED***
+	ZeroAddress = Address{}
 
 	// ZeroHash is a hash of all zeros
-	ZeroHash = Hash***REMOVED******REMOVED***
+	ZeroHash = Hash{}
 )
 
 // Address is an Ethereum address
 type Address [20]byte
 
 // BytesToAddress converts bytes to an address object
-func BytesToAddress(b []byte) Address ***REMOVED***
+func BytesToAddress(b []byte) Address {
 	var a Address
 
 	size := len(b)
@@ -165,50 +165,50 @@ func BytesToAddress(b []byte) Address ***REMOVED***
 
 	copy(a[20-min:], b[len(b)-min:])
 	return a
-***REMOVED***
+}
 
 // Address implements the ethgo.Key interface Address method.
-func (a Address) Address() Address ***REMOVED***
+func (a Address) Address() Address {
 	return a
-***REMOVED***
+}
 
 // Sign implements the ethgo.Key interface Sign method.
-func (a Address) Sign(hash []byte) ([]byte, error) ***REMOVED***
+func (a Address) Sign(hash []byte) ([]byte, error) {
 	panic("an address cannot sign messages")
-***REMOVED***
+}
 
 // MarshalText implements the marshal interface
-func (a Address) MarshalText() ([]byte, error) ***REMOVED***
+func (a Address) MarshalText() ([]byte, error) {
 	return []byte(a.String()), nil
-***REMOVED***
+}
 
 // Bytes returns the bytes of the Address
-func (a Address) Bytes() []byte ***REMOVED***
+func (a Address) Bytes() []byte {
 	return a[:]
-***REMOVED***
+}
 
-func (a Address) String() string ***REMOVED***
+func (a Address) String() string {
 	return a.checksumEncode()
-***REMOVED***
+}
 
-func (a Address) checksumEncode() string ***REMOVED***
+func (a Address) checksumEncode() string {
 	address := strings.ToLower(hex.EncodeToString(a[:]))
 	hash := hex.EncodeToString(utils.Keccak256([]byte(address)))
 
 	ret := "0x"
-	for i := 0; i < len(address); i++ ***REMOVED***
+	for i := 0; i < len(address); i++ {
 		character := string(address[i])
 
 		num, _ := strconv.ParseInt(string(hash[i]), 16, 64)
-		if num > 7 ***REMOVED***
+		if num > 7 {
 			ret += strings.ToUpper(character)
-		***REMOVED*** else ***REMOVED***
+		} else {
 			ret += character
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	return ret
-***REMOVED***
+}
 
 // Hash is an Ethereum hash
 type Hash [32]byte
@@ -216,7 +216,7 @@ type Hash [32]byte
 // HexToHash converts an hex string value to a hash object
 
 // BytesToHash converts bytes to a hash object
-func BytesToHash(b []byte) Hash ***REMOVED***
+func BytesToHash(b []byte) Hash {
 	var h Hash
 
 	size := len(b)
@@ -224,27 +224,27 @@ func BytesToHash(b []byte) Hash ***REMOVED***
 
 	copy(h[32-min:], b[len(b)-min:])
 	return h
-***REMOVED***
+}
 
 // MarshalText implements the marshal interface
-func (h Hash) MarshalText() ([]byte, error) ***REMOVED***
+func (h Hash) MarshalText() ([]byte, error) {
 	return []byte(h.String()), nil
-***REMOVED***
+}
 
 // Bytes returns the bytes of the Hash
-func (h Hash) Bytes() []byte ***REMOVED***
+func (h Hash) Bytes() []byte {
 	return h[:]
-***REMOVED***
+}
 
-func (h Hash) String() string ***REMOVED***
+func (h Hash) String() string {
 	return "0x" + hex.EncodeToString(h[:])
-***REMOVED***
+}
 
-func (h Hash) Location() string ***REMOVED***
+func (h Hash) Location() string {
 	return h.String()
-***REMOVED***
+}
 
-type Block struct ***REMOVED***
+type Block struct {
 	Number             uint64
 	Hash               Hash
 	ParentHash         Hash
@@ -261,21 +261,21 @@ type Block struct ***REMOVED***
 	Transactions       []*Transaction
 	TransactionsHashes []Hash
 	Uncles             []Hash
-***REMOVED***
+}
 
-func (b *Block) Copy() *Block ***REMOVED***
+func (b *Block) Copy() *Block {
 	bb := new(Block)
 	*bb = *b
-	if b.Difficulty != nil ***REMOVED***
+	if b.Difficulty != nil {
 		bb.Difficulty = new(big.Int).Set(b.Difficulty)
-	***REMOVED***
+	}
 	bb.ExtraData = append(bb.ExtraData[:0], b.ExtraData...)
 	bb.Transactions = make([]*Transaction, len(b.Transactions))
-	for indx, txn := range b.Transactions ***REMOVED***
+	for indx, txn := range b.Transactions {
 		bb.Transactions[indx] = txn.Copy()
-	***REMOVED***
+	}
 	return bb
-***REMOVED***
+}
 
 type TransactionType int
 
@@ -287,7 +287,7 @@ const (
 	TransactionDynamicFee TransactionType = 2
 )
 
-type Transaction struct ***REMOVED***
+type Transaction struct {
 	Type TransactionType
 
 	// legacy values
@@ -315,72 +315,72 @@ type Transaction struct ***REMOVED***
 	// eip-1559 values
 	MaxPriorityFeePerGas *big.Int
 	MaxFeePerGas         *big.Int
-***REMOVED***
+}
 
-func (t *Transaction) Copy() *Transaction ***REMOVED***
+func (t *Transaction) Copy() *Transaction {
 	tt := new(Transaction)
-	if t.To != nil ***REMOVED***
+	if t.To != nil {
 		to := Address(*t.To)
 		tt.To = &to
-	***REMOVED***
+	}
 	tt.Input = append(tt.Input[:0], t.Input...)
-	if t.Value != nil ***REMOVED***
+	if t.Value != nil {
 		tt.Value = new(big.Int).Set(t.Value)
-	***REMOVED***
+	}
 	tt.V = append(tt.V[:0], t.V...)
 	tt.R = append(tt.R[:0], t.R...)
 	tt.S = append(tt.S[:0], t.S...)
-	if t.ChainID != nil ***REMOVED***
+	if t.ChainID != nil {
 		tt.ChainID = new(big.Int).Set(t.ChainID)
-	***REMOVED***
-	if t.MaxPriorityFeePerGas != nil ***REMOVED***
+	}
+	if t.MaxPriorityFeePerGas != nil {
 		tt.MaxPriorityFeePerGas = new(big.Int).Set(t.MaxPriorityFeePerGas)
-	***REMOVED***
-	if t.MaxFeePerGas != nil ***REMOVED***
+	}
+	if t.MaxFeePerGas != nil {
 		tt.MaxFeePerGas = new(big.Int).Set(t.MaxFeePerGas)
-	***REMOVED***
+	}
 	return tt
-***REMOVED***
+}
 
-type AccessEntry struct ***REMOVED***
+type AccessEntry struct {
 	Address Address
 	Storage []Hash
-***REMOVED***
+}
 
 type AccessList []AccessEntry
 
-type CallMsg struct ***REMOVED***
+type CallMsg struct {
 	From     Address
 	To       *Address
 	Data     []byte
 	GasPrice uint64
 	Gas      *big.Int
 	Value    *big.Int
-***REMOVED***
+}
 
-type LogFilter struct ***REMOVED***
+type LogFilter struct {
 	Address   []Address
 	Topics    [][]*Hash
 	BlockHash *Hash
 	From      *BlockNumber
 	To        *BlockNumber
-***REMOVED***
+}
 
-func (l *LogFilter) SetFromUint64(num uint64) ***REMOVED***
+func (l *LogFilter) SetFromUint64(num uint64) {
 	b := BlockNumber(num)
 	l.From = &b
-***REMOVED***
+}
 
-func (l *LogFilter) SetToUint64(num uint64) ***REMOVED***
+func (l *LogFilter) SetToUint64(num uint64) {
 	b := BlockNumber(num)
 	l.To = &b
-***REMOVED***
+}
 
-func (l *LogFilter) SetTo(b BlockNumber) ***REMOVED***
+func (l *LogFilter) SetTo(b BlockNumber) {
 	l.To = &b
-***REMOVED***
+}
 
-type Receipt struct ***REMOVED***
+type Receipt struct {
 	TransactionHash   Hash
 	TransactionIndex  uint64
 	ContractAddress   Address
@@ -392,20 +392,20 @@ type Receipt struct ***REMOVED***
 	LogsBloom         []byte
 	Logs              []*Log
 	Status            uint64
-***REMOVED***
+}
 
-func (r *Receipt) Copy() *Receipt ***REMOVED***
+func (r *Receipt) Copy() *Receipt {
 	rr := new(Receipt)
 	*rr = *r
 	rr.LogsBloom = append(rr.LogsBloom[:0], r.LogsBloom...)
 	rr.Logs = make([]*Log, len(r.Logs))
-	for indx, log := range r.Logs ***REMOVED***
+	for indx, log := range r.Logs {
 		rr.Logs[indx] = log.Copy()
-	***REMOVED***
+	}
 	return rr
-***REMOVED***
+}
 
-type Log struct ***REMOVED***
+type Log struct {
 	Removed          bool
 	LogIndex         uint64
 	TransactionIndex uint64
@@ -415,14 +415,14 @@ type Log struct ***REMOVED***
 	Address          Address
 	Topics           []Hash
 	Data             []byte
-***REMOVED***
+}
 
-func (l *Log) Copy() *Log ***REMOVED***
+func (l *Log) Copy() *Log {
 	ll := new(Log)
 	*ll = *l
 	ll.Data = append(ll.Data[:0], l.Data...)
 	return ll
-***REMOVED***
+}
 
 type BlockNumber int
 
@@ -432,60 +432,60 @@ const (
 	Pending  BlockNumber = -3
 )
 
-func (b BlockNumber) Location() string ***REMOVED***
+func (b BlockNumber) Location() string {
 	return b.String()
-***REMOVED***
+}
 
-func (b BlockNumber) String() string ***REMOVED***
-	switch b ***REMOVED***
+func (b BlockNumber) String() string {
+	switch b {
 	case Latest:
 		return "latest"
 	case Earliest:
 		return "earliest"
 	case Pending:
 		return "pending"
-	***REMOVED***
-	if b < 0 ***REMOVED***
+	}
+	if b < 0 {
 		panic("internal. blocknumber is negative")
-	***REMOVED***
+	}
 	return fmt.Sprintf("0x%x", uint64(b))
-***REMOVED***
+}
 
-func EncodeBlock(block ...BlockNumber) BlockNumber ***REMOVED***
-	if len(block) != 1 ***REMOVED***
+func EncodeBlock(block ...BlockNumber) BlockNumber {
+	if len(block) != 1 {
 		return Latest
-	***REMOVED***
+	}
 	return block[0]
-***REMOVED***
+}
 
-type BlockNumberOrHash interface ***REMOVED***
+type BlockNumberOrHash interface {
 	Location() string
-***REMOVED***
+}
 
-func min(i, j int) int ***REMOVED***
-	if i < j ***REMOVED***
+func min(i, j int) int {
+	if i < j {
 		return i
-	***REMOVED***
+	}
 	return j
-***REMOVED***
+}
 
-type Key interface ***REMOVED***
+type Key interface {
 	Address() Address
 	Sign(hash []byte) ([]byte, error)
-***REMOVED***
+}
 
-func completeHex(str string, num int) []byte ***REMOVED***
+func completeHex(str string, num int) []byte {
 	num = num * 2
 	str = strings.TrimPrefix(str, "0x")
 
 	size := len(str)
-	if size < num ***REMOVED***
-		for i := size; i < num; i++ ***REMOVED***
+	if size < num {
+		for i := size; i < num; i++ {
 			str = "0" + str
-		***REMOVED***
-	***REMOVED*** else ***REMOVED***
+		}
+	} else {
 		diff := size - num
 		str = str[diff:]
-	***REMOVED***
+	}
 	return []byte("0x" + str)
-***REMOVED***
+}
