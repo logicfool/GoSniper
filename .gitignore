@@ -32,4 +32,5 @@ __pycache__
 
 # Some Sensitive Files
 config.json
+*/config.json
 config.*
