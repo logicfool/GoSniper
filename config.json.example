@@ -1,0 +1,118 @@
+{
+  "networks": [
+    {
+      "node_url": "ws://127.0.0.1:8546",
+      "chain_id": 561,
+      "name": "bsc",
+      "contract": "0x116AfB449B5958533e8d37e2964ac51ded1Af23c",
+      "datafeed": "0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE",
+      "explorer": "https://bscscan.com/",
+      "gaslimit": 3000000,
+      "gasprice": 20
+    },
+    {
+      "node_url": "http://localhost:8545",
+      "chain_id": 56,
+      "name": "local",
+      "contract": "0x116AfB449B5958533e8d37e2964ac51ded1Af23c",
+      "datafeed": "0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE",
+      "explorer": "https://bscscan.com/",
+      "gaslimit": 3000000,
+      "gasprice": 20
+    },
+    {
+      "node_url": "wss://speedy-nodes-nyc.moralis.io/78fd8cc9150d7e2a80c27dc4/bsc/mainnet/ws",
+      "chain_id": 1,
+      "name": "eth",
+      "contract": "",
+      "explorer": "https://etherscan.io/"
+    },
+    {
+      "node_url": "wss://speedy-nodes-nyc.moralis.io/78fd8cc9150d7e2a80c27dc4/eth/goerli/archive/ws",
+      "chain_id": 5,
+      "name": "goerli",
+      "contract": "0x4839E9dC6256eAE82652115e728AC1d134EF4901",
+      "explorer": "https://goerli.etherscan.io/",
+      "gaslimit": 3000000,
+      "gasprice": 50
+    },
+    {
+      "node_url": "wss://data-seed-prebsc-2-s1.binance.org:8545",
+      "chain_id": 97,
+      "name": "tbsc",
+      "contract": "0x7225e40F195ECC9D0e8264B20669b952d45Ddb6F",
+      "explorer": "https://testnet.bscscan.com/",
+      "gaslimit": 3000000,
+      "gasprice": 20
+    }
+  ],
+  "exchanges": [
+    {
+      "network": 1,
+      "name": "uniswap",
+      "router": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+      "factory": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+      "honeypot": "",
+      "init_code": "96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f"
+    },
+    {
+      "network": 56,
+      "name": "pancake",
+      "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+      "factory": "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",
+      "honeypot": "",
+      "init_code": "00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5"
+    },
+    {
+      "network": 56,
+      "name": "bakeryswap",
+      "router": "0xCDe540d7eAFE93aC5fE6233Bee57E1270D3E330F",
+      "factory": "0x01bF7C66c6BD861915CdaaE475042d3c4BaE16A7",
+      "honeypot": "",
+      "init_code": "e2e87433120e32c4738a7d8f3271f3d872cbe16241d67537139158d90bac61d3"
+    },
+    {
+      "network": 5,
+      "name": "uniswap-goerli",
+      "router": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+      "factory": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+      "honeypot": "",
+      "init_code": "96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f"
+    },
+    {
+      "network": 97,
+      "name": "pancake-tbsc",
+      "router": "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3",
+      "factory": "0xB7926C0430Afb07AA7DEfDE6DA862aE0Bde767bc",
+      "honeypot": "",
+      "init_code": "ecba335299a6693cb2ebc4782e74669b84290b6378ea3a3873c7231a8d7d1074"
+    }
+  ],
+  "private_keys": [
+  ],
+  "sniper": {
+    "multiwallet": true,
+    "buy_split": 1,
+    "sell_split": 1,
+    "liquidity_add_functions": [
+      "f305d719",
+      "e8e33700"
+    ],
+    "liquidity_remove_functions": [
+      "baa2abde",
+      "02751cec",
+      "2195995c",
+      "ded9382a",
+      "af2979eb",
+      "7d72d6e0"
+    ],
+    "mutli_main_snipe": true,
+    "Amount": 0.1,
+    "Token": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+    "Pair": "0x0000000000000000000000000000000000000000",
+    "Network": "local",
+    "ToBuy": true,
+    "ToSell": true,
+    "NumberOfMultipleWallets": 10
+  }
+}
